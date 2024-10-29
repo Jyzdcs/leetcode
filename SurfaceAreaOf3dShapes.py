@@ -1,27 +1,29 @@
 class Solution(object):
-	def surfaceArea(self, grid):
-		n = len(grid)
-		totalFaceVisible = 0
+    def surfaceArea(self, grid):
+        n = len(grid)
+        totalVisibleFace = 0
 
-		for i in range(n):
-			for j in range(n):
-				if j > 0:
-					totalFaceVisible += 2
-				
-				height = grid[i][j]
-				
-				front = height if i == 0 else max(0, height - grid[i - 1][j])
-				totalFaceVisible += front
+        for i in range(n):
+            for j in range(n):
+                if grid[i][j] > 0:
+                    totalVisibleFace += 2
 
-				back = height if i == (n - 1) else max(0, height - grid[i + 1][j])
-				totalFaceVisible += back
+                caseValue = grid[i][j]
 
-				left = height if j == 0 else max(0, height - grid[i][j - 1])
-				totalFaceVisible += left
+                front = caseValue if i == 0 else max(0, caseValue - grid[i-1][j])
+                totalVisibleFace += front
 
-				right = height if j == (n - 1) else max(0, height - grid[i][j + 1])
-				totalFaceVisible += right
-		return totalFaceVisible
+                back = caseValue if i == (n - 1) else max(0, caseValue - grid[i+1][j])
+                totalVisibleFace += back
+
+                left = caseValue if j == 0 else max(0, caseValue - grid[i][j-1])
+                totalVisibleFace += left
+
+                right = caseValue if j == (n - 1) else max(0, caseValue - grid[i][j+1])
+                totalVisibleFace += right
+
+        return totalVisibleFace
+
 
 
 solution = Solution()
